@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2023/11/27 20:40:52 by dyunta           ###   ########.fr       */
+/*   Created: 2023/11/27 22:19:13 by dyunta            #+#    #+#             */
+/*   Updated: 2023/11/27 22:26:30 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minitalk.h"
+# include "minitalk.h"
 
-int	main(void)
+int	sanitized_input(int argc, char **argv)
 {
-	ft_putendl_fd(ft_itoa(42), 2);
+	if (argc != 3)
+		return (1);
+	argv[0] = NULL;
 	return (0);
 }

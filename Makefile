@@ -11,22 +11,25 @@ OPT=-O
 #DEPFLAGS=-MP -MD
 CFLAGS=-Wall -Wextra -Werror -I$(INCDIR) $(OPT)
 
-CFILES=$(shell find $(CODEDIRS) -name '*.c')
-OBJECTS = $(CFILES:.c=.o)
+CFILES1=$(shell find $(CODEDIRS) -name '*client*.c')
+CFILES2=$(shell find $(CODEDIRS) -name '*server*.c')
+OBJECTS1 = $(CFILES1:.c=.o)
+OBJECTS2 = $(CFILES2:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(BINARY1) $(BINARY2)
 
 # https://stackoverflow.com/questions/3220277/what-do-the-makefile-symbols-and-mean
-$(BINARY1): $(OBJECTS)
+$(BINARY1): $(OBJECTS1) $(COMMON_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
 
-$(BINARY2): $(OBJECTS)
+$(BINARY2): $(OBJECTS2)
 	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
 
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS1)
+	rm -f $(OBJECTS2)
 
 fclean: clean
 	rm -f $(BINARY1)
