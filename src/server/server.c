@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 22:19:13 by dyunta            #+#    #+#             */
-/*   Updated: 2023/11/29 20:58:23 by dyunta           ###   ########.fr       */
+/*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
+/*   Updated: 2023/11/29 21:44:42 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minitalk.h"
 
-int	sanitized_input(int argc, char **argv)
+void	signal_handler(int signum)
 {
-	int	i;
+	ft_putendl_fd(ft_itoa(signum), 1);
+	ft_putendl_fd("This is great", 1);
+}
 
-	if (argc != 3)
-		return (1);
-	i = 0;
-	while (argv[1][i])
+int	main(void)
+{
+	struct sigaction sa;
+	sa.sa_handler = signal_handler;
+	sa.sa_flags = 0;
+
+	sigaction(SIGINT, &sa, NULL);
+	int i = 0;
+
+	while (1)
 	{
-		if (!ft_isdigit(argv[1][i++]))
-			return (1);
+		i += 1;
+		i -= 1;
 	}
-	i = 0;
-	while (argv[2][i])
-	{
-		if (!ft_isprint(argv[2][i++]))
-			return (1);
-	}
+
 	return (0);
 }

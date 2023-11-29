@@ -14,6 +14,7 @@
 # define MINITALK_H
 
 # include "../lib/libft.h"
+# include <signal.h>
 
 int	sanitized_input(int argc, char **argv);
 
