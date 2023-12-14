@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/14 20:48:34 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:52:05 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char **argv)
 			}
 			else
 				kill(pid_server, SIGUSR2);
+			usleep(500);
 			j--;
 		}
 		j = 7;

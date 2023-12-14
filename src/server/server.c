@@ -6,14 +6,17 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/14 20:54:08 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/14 21:17:58 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/minitalk.h"
 
+s_list head = ft_lstnew("1");
+
 void	signal_handler_usr1(int signum)
 {
+
 	ft_putendl_fd(ft_itoa(signum), 4);
 	ft_putchar_fd('1', 1);
 }
