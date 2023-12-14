@@ -6,11 +6,12 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/11 21:14:15 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:48:34 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minitalk.h"
+// change path at the end
+# include "../../include/minitalk.h"
 
 int	main(int argc, char **argv)
 {
@@ -23,7 +24,6 @@ int	main(int argc, char **argv)
 	ft_putendl_fd(ft_strjoin("Client PID: ", ft_itoa(pid)), 1);
 
 	pid_t pid_server = ft_atoi(argv[1]);
-	kill(pid_server, SIGUSR1);
 
 	/*
 	* The following logic operates as follows:
@@ -41,5 +41,28 @@ int	main(int argc, char **argv)
 	// 0 0 0 0 1 0 1 0 - 42 - 32 = 10
 	// 0 0 0 0 0 0 1 0 - 10 - 8 = 2
 	// 0 0 0 0 0 0 0 0 - 2 - 2 = 0
+	int i = 0;
+	int j = 7;
+	char letter = argv[2][i];
+	while (letter)
+	{
+		while (j >= 0)
+		{
+			ft_putnbr_fd(letter >> j, 1);
+			if (letter >> j)
+			{
+				kill(pid_server, SIGUSR1);
+				letter -= 0x01 << j;
+			}
+			else
+				kill(pid_server, SIGUSR2);
+			j--;
+		}
+		j = 7;
+		i++;
+		letter = argv[2][i];
+		ft_putchar_fd('\n', 1);
+	}
+	kill(pid_server, SIGUSR1);
 	return (0);
 }
