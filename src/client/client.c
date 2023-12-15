@@ -41,6 +41,8 @@ int	main(int argc, char **argv)
 	// 0 0 0 0 1 0 1 0 - 42 - 32 = 10
 	// 0 0 0 0 0 0 1 0 - 10 - 8 = 2
 	// 0 0 0 0 0 0 0 0 - 2 - 2 = 0
+
+	// TODO: SERVER RECIEVES ONE MORE SIGUSR1 signal at the end of the binary than expected
 	int i = 0;
 	int j = 7;
 	char letter = argv[2][i];
@@ -56,7 +58,7 @@ int	main(int argc, char **argv)
 			}
 			else
 				kill(pid_server, SIGUSR2);
-			usleep(500);
+			usleep(5000);
 			j--;
 		}
 		j = 7;
