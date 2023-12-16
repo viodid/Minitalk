@@ -32,17 +32,16 @@ void	convert_binary_to_char(int bool)
 void	signal_handler_usr1(int signum)
 {
 	ft_putendl_fd(ft_itoa(signum), 4);
-	ft_putchar_fd('1', 1);
-	// convert_binary_to_char(1);
+	// ft_putchar_fd('1', 1);
+	convert_binary_to_char(1);
 }
 
 void	signal_handler_usr2(int signum)
 {
 	ft_putendl_fd(ft_itoa(signum), 4);
-	ft_putchar_fd('0', 1);
-	// convert_binary_to_char(0);
+	// ft_putchar_fd('0', 1);
+	convert_binary_to_char(0);
 }
-
 
 int	main(int argc, char **argv)
 {
