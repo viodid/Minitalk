@@ -6,11 +6,11 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:19:13 by dyunta            #+#    #+#             */
-/*   Updated: 2023/11/29 20:58:23 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/17 19:27:12 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minitalk.h"
+#include "minitalk.h"
 
 int	sanitized_input(int argc, char **argv)
 {

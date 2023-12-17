@@ -6,64 +6,41 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/14 21:17:58 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/17 19:32:14 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minitalk.h"
 
-void	convert_binary_to_char(int bool)
+static void	signal_handler(int signum);
+
+int	main(void)
+{
+	const pid_t	pid = getpid();
+
+	signal(SIGUSR1, signal_handler);
+	signal(SIGUSR2, signal_handler);
+	ft_putendl_fd(ft_strjoin("Server PID: ", ft_itoa(pid)), 1);
+	while (1)
+	{
+		pause();
+	}
+	return (0);
+}
+
+static void	signal_handler(int signum)
 {
 	static int	cycle = 7;
 	static int	letter = 0x00;
 
-	if (bool)
+	if (signum == SIGUSR1)
 		letter |= 0x01 << cycle;
 	if (cycle == 0)
 	{
-		ft_putchar_fd(letter, 1);
+		ft_putchar_fd((char)letter, 1);
 		cycle = 7;
 		letter = 0;
 	}
 	else
 		cycle--;
-}
-
-void	signal_handler_usr1(int signum)
-{
-	ft_putendl_fd(ft_itoa(signum), 4);
-	// ft_putchar_fd('1', 1);
-	convert_binary_to_char(1);
-}
-
-void	signal_handler_usr2(int signum)
-{
-	ft_putendl_fd(ft_itoa(signum), 4);
-	// ft_putchar_fd('0', 1);
-	convert_binary_to_char(0);
-}
-
-int	main(int argc, char **argv)
-{
-	struct sigaction sa1;
-	struct sigaction sa2;
-
-	(void)argv;
-	sa1.sa_handler = signal_handler_usr1;
-	sa1.sa_flags = SA_SIGINFO;
-	sa2.sa_handler = signal_handler_usr2;
-	sa2.sa_flags = SA_SIGINFO;
-
-	sigaction(SIGUSR1, &sa1, NULL);
-	sigaction(SIGUSR2, &sa2, NULL);
-
-	const pid_t pid = getpid();
-	ft_putendl_fd(ft_strjoin("Server PID: ", ft_itoa(pid)), 1);
-
-	while (argc == 1)
-	{
-		pause();
-	}
-
-	return (0);
 }
