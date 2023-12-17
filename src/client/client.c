@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/17 19:30:12 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/17 20:06:34 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	main(int argc, char **argv)
 
 static void	send_signals(char **argv, pid_t pid_server)
 {
-	int		i;
-	int		j;
-	char	letter;
+	int	i;
+	int	j;
+	int	letter;
 
 	i = 0;
 	j = 7;

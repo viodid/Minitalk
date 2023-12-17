@@ -11,31 +11,44 @@ OPT=-g3
 #DEPFLAGS=-MP -MD
 CFLAGS=-Wall -Wextra -Werror -I$(INCDIR) $(OPT)
 
-CFILES1=$(shell find $(CODEDIRS) -name '*client*.c')
-CFILES2=$(shell find $(CODEDIRS) -name '*server*.c')
+CFILES1=$(shell find $(CODEDIRS) -name '*client.c')
+CFILES2=$(shell find $(CODEDIRS) -name '*server.c')
 OBJECTS1 = $(CFILES1:.c=.o)
 OBJECTS2 = $(CFILES2:.c=.o)
+
+# Include header bonus file header_bonus.h
+BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*.c')
+BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*.c')
+BONUS_OBJ1 = $(BONUS_CFILES1:.c=.o)
+BONUS_OBJ2 = $(BONUS_CFILES2:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(BINARY1) $(BINARY2)
 
 # https://stackoverflow.com/questions/3220277/what-do-the-makefile-symbols-and-mean
-$(BINARY1): $(OBJECTS1) $(COMMON_OBJS)
+$(BINARY1): $(OBJECTS1)
 	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
 
 $(BINARY2): $(OBJECTS2)
 	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
 
 clean:
-	rm -f $(OBJECTS1)
-	rm -f $(OBJECTS2)
+	rm -f $(OBJECTS1) $(OBJECTS2) $(BONUS_OBJ1) $(BONUS_OBJ2)
 
 fclean: clean
-	rm -f $(BINARY1)
-	rm -f $(BINARY2)
+	rm -f $(BINARY1) $(BINARY2) client_bonus server_bonus
 
 re: fclean all
+
+bonus: client_bonus server_bonus
+
+client_bonus: $(BONUS_OBJ1)
+	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+
+server_bonus: $(BONUS_OBJ2)
+	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+
 
 diff:
 	$(info The status of the repository, and the volume of per-file changes:)

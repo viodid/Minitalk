@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2023/12/17 19:32:14 by dyunta           ###   ########.fr       */
+/*   Updated: 2023/12/17 19:46:28 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(void)
 
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
+	ft_putendl_fd("\033[0;35m", 1);
+	ft_putendl_fd("\033[0;36m", 1);
 	ft_putendl_fd(ft_strjoin("Server PID: ", ft_itoa(pid)), 1);
 	while (1)
 	{
@@ -28,6 +30,11 @@ int	main(void)
 	return (0);
 }
 
+/*
+ * This function is called when the server receives a signal.
+ * It is called once for each bit of the character.
+ * When the character is complete, it is printed.
+ */
 static void	signal_handler(int signum)
 {
 	static int	cycle = 7;
