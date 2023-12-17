@@ -15,7 +15,7 @@
 void	convert_binary_to_char(int bool)
 {
 	static int	cycle = 7;
-	static int	letter = 0;
+	static int	letter = 0x00;
 
 	if (bool)
 		letter |= 0x01 << cycle;
