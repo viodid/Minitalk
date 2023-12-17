@@ -18,7 +18,7 @@ void	convert_binary_to_char(int bool)
 	static int	letter = 0;
 
 	if (bool)
-		letter += 0x01 << cycle;
+		letter |= 0x01 << cycle;
 	if (cycle == 0)
 	{
 		ft_putchar_fd(letter, 1);
