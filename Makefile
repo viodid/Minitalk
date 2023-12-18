@@ -11,14 +11,13 @@ OPT=-g3
 #DEPFLAGS=-MP -MD
 CFLAGS=-Wall -Wextra -Werror -I$(INCDIR) $(OPT)
 
-CFILES1=$(shell find $(CODEDIRS) -name '*client.c')
-CFILES2=$(shell find $(CODEDIRS) -name '*server.c')
+CFILES1=$(shell find $(CODEDIRS)/client -name '*client.c')
+CFILES2=$(shell find $(CODEDIRS)/server -name '*server.c')
 OBJECTS1 = $(CFILES1:.c=.o)
 OBJECTS2 = $(CFILES2:.c=.o)
 
-# Include header bonus file header_bonus.h
-BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*.c')
-BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*.c')
+BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c') $(CODEDIRS)/client/utils_client.c
+BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*bonus.c')
 BONUS_OBJ1 = $(BONUS_CFILES1:.c=.o)
 BONUS_OBJ2 = $(BONUS_CFILES2:.c=.o)
 
