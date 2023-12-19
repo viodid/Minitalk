@@ -3,6 +3,7 @@ BINARY1=client
 BINARY2=server
 CODEDIRS=src
 INCDIR=./include/
+INCLIB=./lib/libft.a ./lib/ft_printf/printf.a
 BIN_DIR=./bin/
 
 CC=gcc
@@ -28,10 +29,10 @@ $(NAME): $(BINARY1) $(BINARY2)
 
 # https://stackoverflow.com/questions/3220277/what-do-the-makefile-symbols-and-mean
 $(BINARY1): $(OBJECTS1)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 $(BINARY2): $(OBJECTS2)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 clean:
 	rm -f $(OBJECTS1) $(OBJECTS2) $(BONUS_OBJ1) $(BONUS_OBJ2)
@@ -44,10 +45,10 @@ re: fclean all
 bonus: client_bonus server_bonus
 
 client_bonus: $(BONUS_OBJ1)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 server_bonus: $(BONUS_OBJ2)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 
 diff:
