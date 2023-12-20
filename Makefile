@@ -58,9 +58,11 @@ diff:
 
 struct:
 	$(info Create folder and basic file structure.)
-	mkdir src lib include docs tests
+	mkdir -p src lib/ft_printf include docs tests
 	git clone https://github.com/viodid/libft.git lib/
+	git clone https://github.com/viodid/ft_printf.git lib/ft_printf/
 	cd lib; make; make clean; rm -rf .git
+	cd lib/ft_pintf; make; make clean; rm -rf .git
 
 
 .PHONY: minitalk all clean fclean re diff struct

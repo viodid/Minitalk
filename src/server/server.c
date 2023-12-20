@@ -26,6 +26,7 @@ int	main(void)
 	ft_putendl_fd("\033[0;36m", 1);
 	// TODO: implement my printf
 	pid_str = ft_itoa(pid);
+	ft_printf("%d\n", pid_str);
 	output_str = ft_strjoin("Server PID: ", pid_str);
 	ft_putendl_fd(output_str, 1);
 	free(pid_str);
