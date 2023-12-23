@@ -55,6 +55,8 @@ dkms.conf
 # Custom executables
 client
 server
+client_bonus
+server_bonus
 
 lib/ft_printf
 !client/

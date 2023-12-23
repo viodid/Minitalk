@@ -17,8 +17,7 @@ CFILES2=$(shell find $(CODEDIRS)/server -name '*server.c')
 OBJECTS1 = $(CFILES1:.c=.o)
 OBJECTS2 = $(CFILES2:.c=.o)
 
-#BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c') $(CODEDIRS)/client/utils_client.c
-BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c')
+BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c') $(CODEDIRS)/client/utils_client.c
 BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*bonus.c')
 BONUS_OBJ1 = $(BONUS_CFILES1:.c=.o)
 BONUS_OBJ2 = $(BONUS_CFILES2:.c=.o)
