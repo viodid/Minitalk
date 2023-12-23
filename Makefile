@@ -3,6 +3,7 @@ BINARY1=client
 BINARY2=server
 CODEDIRS=src
 INCDIR=./include/
+INCLIB=./lib/libft.a ./lib/ft_printf/printf.a
 BIN_DIR=./bin/
 
 CC=gcc
@@ -11,14 +12,14 @@ OPT=-g3
 #DEPFLAGS=-MP -MD
 CFLAGS=-Wall -Wextra -Werror -I$(INCDIR) $(OPT)
 
-CFILES1=$(shell find $(CODEDIRS) -name '*client.c')
-CFILES2=$(shell find $(CODEDIRS) -name '*server.c')
+CFILES1=$(shell find $(CODEDIRS)/client -name '*client.c')
+CFILES2=$(shell find $(CODEDIRS)/server -name '*server.c')
 OBJECTS1 = $(CFILES1:.c=.o)
 OBJECTS2 = $(CFILES2:.c=.o)
 
-# Include header bonus file header_bonus.h
-BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*.c')
-BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*.c')
+#BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c') $(CODEDIRS)/client/utils_client.c
+BONUS_CFILES1 = $(shell find $(CODEDIRS)/client -name '*bonus.c')
+BONUS_CFILES2 = $(shell find $(CODEDIRS)/server -name '*bonus.c')
 BONUS_OBJ1 = $(BONUS_CFILES1:.c=.o)
 BONUS_OBJ2 = $(BONUS_CFILES2:.c=.o)
 
@@ -28,10 +29,10 @@ $(NAME): $(BINARY1) $(BINARY2)
 
 # https://stackoverflow.com/questions/3220277/what-do-the-makefile-symbols-and-mean
 $(BINARY1): $(OBJECTS1)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 $(BINARY2): $(OBJECTS2)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 clean:
 	rm -f $(OBJECTS1) $(OBJECTS2) $(BONUS_OBJ1) $(BONUS_OBJ2)
@@ -44,10 +45,10 @@ re: fclean all
 bonus: client_bonus server_bonus
 
 client_bonus: $(BONUS_OBJ1)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 server_bonus: $(BONUS_OBJ2)
-	$(CC) $(CFLAGS) -o $@ $^ lib/libft.a
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLIB)
 
 
 diff:
@@ -57,9 +58,11 @@ diff:
 
 struct:
 	$(info Create folder and basic file structure.)
-	mkdir src lib include docs tests
+	mkdir -p src lib/ft_printf include docs tests
 	git clone https://github.com/viodid/libft.git lib/
+	git clone https://github.com/viodid/ft_printf.git lib/ft_printf/
 	cd lib; make; make clean; rm -rf .git
+	cd lib/ft_pintf; make; make clean; rm -rf .git
 
 
 .PHONY: minitalk all clean fclean re diff struct

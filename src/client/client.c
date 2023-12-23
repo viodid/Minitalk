@@ -35,11 +35,15 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid_server;
 
-	if (sanitized_input(argc, argv))
-	{
-		ft_putendl_fd("usage: ./client [PID] [message]", 2);
-		return (1);
-	}
+	// if (sanitized_input(argc, argv))
+	// {
+	// 	ft_putendl_fd("usage: ./client [PID] [message]", 2);
+	// 	return (1);
+	// }
+	// TODO: DELTE WORKAROUND
+	if (argc != 3)
+		ft_putendl_fd("nope", 2);
+
 	pid_server = ft_atoi(argv[1]);
 	send_signals(argv, pid_server);
 	return (0);
