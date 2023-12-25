@@ -20,6 +20,7 @@ int	main(void)
 	char		*pid_str;
 	char		*output_str;
 
+	// TODO: BONUS get sender PID https://stackoverflow.com/questions/48830222/get-pid-of-the-signal-sender-in-c
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
 	ft_putendl_fd("\033[0;35m", 1);
