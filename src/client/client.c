@@ -35,11 +35,13 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid_server;
 
-	 if (sanitized_input(argc, argv))
-	 {
-	 	ft_putendl_fd("usage: ./client [PID] [message]", 2);
-	 	return (1);
-	 }
+	if (sanitized_input(argc, argv))
+	{
+		ft_putendl_fd("usage: ./client [PID] [message]", 2);
+		return (1);
+	}
+	// DEBUG PURPOSES
+	ft_putendl_fd(ft_strjoin("PID number: ", ft_itoa(getpid())), 2);
 
 	pid_server = ft_atoi(argv[1]);
 	send_signals(argv, pid_server);
@@ -54,7 +56,7 @@ static void	send_signals(char **argv, pid_t pid_server)
 
 	i = 0;
 	j = 7;
-	letter = argv[2][i];
+	letter = (int) argv[2][i];
 	while (letter)
 	{
 		while (j >= 0)
@@ -71,6 +73,6 @@ static void	send_signals(char **argv, pid_t pid_server)
 		}
 		j = 7;
 		i++;
-		letter = argv[2][i];
+		letter = (int) argv[2][i];
 	}
 }
