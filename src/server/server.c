@@ -12,7 +12,7 @@
 
 #include "../../include/minitalk.h"
 
-static void	signal_handler(int signum);
+static void	signal_handler(int signum, siginfo_t *info, void *context);
 
 int	main(void)
 {
@@ -21,8 +21,12 @@ int	main(void)
 	char		*output_str;
 
 	// TODO: BONUS get sender PID https://stackoverflow.com/questions/48830222/get-pid-of-the-signal-sender-in-c
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
+	struct sigaction act = {0};
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = &signal_handler;
+
+//	signal(SIGUSR1, signal_handler);
+//	signal(SIGUSR2, signal_handler);
 	ft_putendl_fd("\033[0;35m", 1);
 	ft_putendl_fd("\033[0;36m", 1);
 	// TODO: implement my printf
@@ -33,6 +37,8 @@ int	main(void)
 	free(output_str);
 	while (1)
 	{
+		sigaction(SIGUSR1, &act, NULL);
+		sigaction(SIGUSR2, &act, NULL);
 		pause();
 	}
 	return (0);
@@ -43,11 +49,14 @@ int	main(void)
  * It is called once for each bit of the character.
  * When the character is complete, it is printed.
  */
-static void	signal_handler(int signum)
+static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static int	cycle = 7;
 	static int	letter = 0x00;
 
+//	ft_putendl_fd(ft_strjoin("siginfo: ", ft_itoa(info->si_signo)), 1);
+	info->si_signo += 2;
+	(void) context;
 	if (signum == SIGUSR1)
 		letter |= 0x01 << cycle;
 	if (cycle == 0)
