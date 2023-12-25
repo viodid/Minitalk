@@ -17,8 +17,8 @@ static void	signal_handler(int signum);
 int	main(void)
 {
 	const pid_t	pid = getpid();
-	char	*pid_str;
-	char	*output_str;
+	char		*pid_str;
+	char		*output_str;
 
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
@@ -26,7 +26,6 @@ int	main(void)
 	ft_putendl_fd("\033[0;36m", 1);
 	// TODO: implement my printf
 	pid_str = ft_itoa(pid);
-	ft_printf("%d\n", pid_str);
 	output_str = ft_strjoin("Server PID: ", pid_str);
 	ft_putendl_fd(output_str, 1);
 	free(pid_str);
