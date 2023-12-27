@@ -54,8 +54,8 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 	static int	cycle = 7;
 	static int	letter = 0x00;
 
-	ft_putendl_fd(ft_strjoin("siginfo: ", ft_itoa(info->si_pid)), 1);
-//	info->si_signo += 2;
+	// Acknowledge received signal
+	kill(info->si_pid, SIGUSR1);
 	(void) context;
 	if (signum == SIGUSR1)
 		letter |= 0x01 << cycle;

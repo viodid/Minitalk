@@ -14,6 +14,7 @@
 #include "../../include/minitalk.h"
 
 static void	send_signals(char **argv, pid_t pid_server);
+static void signal_handler(int signum);
 
 /*
 * The following logic operates as follows:
@@ -35,6 +36,7 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid_server;
 
+	signal(SIGUSR1, signal_handler);
 	if (sanitized_input(argc, argv))
 	{
 		ft_putendl_fd("usage: ./client [PID] [message]", 2);
@@ -45,6 +47,7 @@ int	main(int argc, char **argv)
 
 	pid_server = ft_atoi(argv[1]);
 	send_signals(argv, pid_server);
+	pause();
 	return (0);
 }
 
@@ -74,5 +77,14 @@ static void	send_signals(char **argv, pid_t pid_server)
 		j = 7;
 		i++;
 		letter = (int) argv[2][i];
+	}
+}
+
+static void signal_handler(int signum)
+{
+	if (signum == SIGUSR1)
+	{
+		ft_putendl_fd("Message received by the server.", 1);
+		exit(0);
 	}
 }
