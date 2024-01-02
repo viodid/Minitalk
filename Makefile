@@ -3,7 +3,7 @@ BINARY1=client
 BINARY2=server
 CODEDIRS=src
 INCDIR=./include/
-INCLIB=./lib/libft.a ./lib/ft_printf/printf.a
+INCLIB=./lib/libft.a
 BIN_DIR=./bin/
 
 CC=gcc
