@@ -55,7 +55,8 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 	static int	letter = 0x00;
 
 	// Acknowledge received signal
-	kill(info->si_pid, SIGUSR1);
+//	kill(info->si_pid, SIGUSR1);
+	ft_itoa(info->si_signo);
 	(void) context;
 	if (signum == SIGUSR1)
 		letter |= 0x01 << cycle;
