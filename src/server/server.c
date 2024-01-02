@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2024/01/02 19:48:15 by dyunta           ###   ########.fr       */
+/*   Updated: 2024/01/02 19:48:43 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static int	cycle = 7;
 	static int	letter = 0x00;
+	static int	sent = 1;
 
 	(void) context;
 	if (signum == SIGUSR1)
@@ -62,5 +63,9 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 	}
 	else
 		cycle--;
-	kill(info->si_pid, SIGUSR1);
+	if (sent)
+	{
+		kill(info->si_pid, SIGUSR1);
+		sent = 0;
+	}
 }

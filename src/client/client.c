@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2024/01/02 19:45:22 by dyunta           ###   ########.fr       */
+/*   Updated: 2024/01/02 20:22:52 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ static void	send_signals(char **argv, pid_t pid_server)
 
 static void	signal_handler(int signum)
 {
-	static int	displayed = 1;
-
-	if (signum == SIGUSR1 && displayed)
-	{
+	if (signum == SIGUSR1)
 		ft_putendl_fd("Message received by the server.", 1);
-		displayed = 0;
-	}
 }
