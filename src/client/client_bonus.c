@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2024/01/02 21:26:03 by dyunta           ###   ########.fr       */
+/*   Updated: 2024/01/07 19:02:32 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	send_newline(pid_t pid)
 		usleep(50);
 	}
 }
-
 
 static void	signal_handler(int signum)
 {

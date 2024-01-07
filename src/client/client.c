@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 22:12:33 by dyunta            #+#    #+#             */
-/*   Updated: 2024/01/02 21:26:03 by dyunta           ###   ########.fr       */
+/*   Updated: 2024/01/07 19:19:12 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/minitalk.h"
 
 static void	send_signals(char **argv, pid_t pid_server);
-static void	signal_handler(int signum);
+static void	send_newline(pid_t pid);
 
 /*
 * The following logic operates as follows:
@@ -36,7 +36,6 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid_server;
 
-	signal(SIGUSR1, signal_handler);
 	if (sanitized_input(argc, argv))
 	{
 		ft_putendl_fd("usage: ./client [PID] [message]", 2);
@@ -54,10 +53,10 @@ static void	send_signals(char **argv, pid_t pid_server)
 	int	letter;
 
 	i = 0;
-	j = 7;
 	letter = (int) argv[2][i];
 	while (letter)
 	{
+		j = 7;
 		while (j >= 0)
 		{
 			if (letter >> j)
@@ -70,14 +69,20 @@ static void	send_signals(char **argv, pid_t pid_server)
 			usleep(50);
 			j--;
 		}
-		j = 7;
 		i++;
 		letter = (int) argv[2][i];
 	}
+	send_newline(pid_server);
 }
 
-static void	signal_handler(int signum)
+static void	send_newline(pid_t pid)
 {
-	if (signum == SIGUSR1)
-		ft_putendl_fd("Message received by the server.", 1);
+	int	i;
+
+	i = 8;
+	while (i--)
+	{
+		kill(pid, SIGUSR1);
+		usleep(50);
+	}
 }

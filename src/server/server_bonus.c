@@ -6,7 +6,7 @@
 /*   By: dyunta <dyunta@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:40:48 by dyunta            #+#    #+#             */
-/*   Updated: 2024/01/02 20:36:33 by dyunta           ###   ########.fr       */
+/*   Updated: 2024/01/07 19:02:34 by dyunta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	main(void)
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = &signal_handler;
 	pid = getpid();
-	ft_putendl_fd("\033[0;35m", 1);
-	ft_putendl_fd("\033[0;36m", 1);
 	pid_str = ft_itoa(pid);
 	output_str = ft_strjoin("Server PID: ", pid_str);
 	ft_putendl_fd(output_str, 1);
