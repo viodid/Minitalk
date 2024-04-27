@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// change path at the end
-#include "../../include/minitalk.h"
+#include <minitalk.h>
 
 static void	send_signals(char **argv, pid_t pid_server);
 static void	signal_handler(int signum);
