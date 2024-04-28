@@ -13,7 +13,8 @@
 #include "libft.h"
 
 /*
-	Takes a pointer to a str, and returns its length without the NULL char included.
+	Takes a pointer to a str, and returns its length without the NULL char
+	included.
 */
 size_t	ft_strlen(const char *s)
 {

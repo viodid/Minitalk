@@ -13,8 +13,8 @@
 #include "libft.h"
 
 /*
-	Fills the first len bytes of the memory area pointed to by b with the constant
-	byte c.
+	Fills the first len bytes of the memory area pointed to by b with
+	the constant byte c.
 */
 void	*ft_memset(void *b, int c, size_t len)
 {
